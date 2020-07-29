@@ -11,8 +11,8 @@ spring:
 #    password: postgres
   # DBの設定(デプロイ環境)
   datasource:
-    driverClassName: org.postgresql.Driver
-    url: spring.datasource.url=jdbc:postgresql://ec2-50-16-198-4.compute-1.amazonaws.com:5432/d72hh6hk3gm0l4
+    driver-class-name: org.postgresql.Driver
+    url: spring.datasource.url=jdbc:postgresql://ec2-50-16-198-4.compute-1.amazonaws.com:5432/d72hh6hk3gm0l4?sslmode=require
     username: sxutlquffhrxzv
     password: a1fa84bdc2546be64a2fc7ba68fdb984f1563f5c1326d61bf0d082ccfb864823
 
