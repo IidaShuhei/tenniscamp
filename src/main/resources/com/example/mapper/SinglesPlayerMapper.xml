@@ -57,8 +57,32 @@
 		LEFT OUTER JOIN doubles_scores AS dd ON d.doubles_player_id = dd.doubles_player_id
 	</select>
 	
+	
+	<resultMap type="com.example.domain.SinglesPlayer" id="SinglesPlayersResultMap">
+		<id property="singlesPlayerId" column="singles_player_id" />
+		<result property="singlesPlayerName" column="singles_player_name" />
+		<result property="imagePath" column="image_path" />
+		<result property="doublesPlayerId" column="doubles_player_id" />
+	</resultMap>
+	
 	<insert id="registerSinglesPlayer">
 		INSERT INTO singles_players(singles_player_name,image_path)VALUES(#{singlesPlayerName},#{imagePath})
 	</insert>
+	
+	<update id="updateSinglesPlayer">
+		UPDATE singles_players SET doubles_player_id = #{doublesPlayerId} WHERE singles_player_id = #{singlesPlayerId}
+	</update>
+	
+	<select id="findAllPlayer" resultMap="SinglesPlayersResultMap">
+		SELECT * FROM singles_players WHERE doubles_player_id IS NULL
+	</select>
+	
+	<select id="load" resultMap="SinglesPlayersResultMap">
+		SELECT * FROM singles_players WHERE singles_player_id = #{singlesPlayerId}
+	</select>
+	
+	<select id="findPlayerExceptByPlayerId" parameterType="int" resultMap="SinglesPlayersResultMap">
+		<![CDATA[ SELECT * FROM singles_players WHERE singles_player_id <> #{singlesPlayerId} AND doubles_player_id IS NULL ]]>
+	</select>
 	
 </mapper>

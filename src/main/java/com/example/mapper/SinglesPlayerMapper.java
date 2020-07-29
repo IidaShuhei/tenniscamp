@@ -11,5 +11,8 @@ public interface SinglesPlayerMapper {
 
 	List<SinglesPlayer> findAll();
 	void registerSinglesPlayer(SinglesPlayer singlesPlayer);
-	void registerDoublesPlayer(Integer singlesPlayerId);
+	void updateSinglesPlayer(Integer doublesPlayerId, Integer singlesPlayerId);
+	List<SinglesPlayer> findAllPlayer();
+	List<SinglesPlayer> findPlayerExceptByPlayerId(Integer singlesPlayerId);
+	SinglesPlayer load(Integer singlesPlayerId);
 }

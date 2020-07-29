@@ -1,5 +1,6 @@
 package com.example.service;
 
+
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -20,25 +21,30 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.common.UploadPathConfiguration;
+import com.example.domain.DoublesPlayer;
 import com.example.domain.SinglesPlayer;
-import com.example.form.RegisterSinglesPlayerForm;
+import com.example.form.RegisterDoublesPlayerForm;
+import com.example.mapper.DoublesPlayerMapper;
 import com.example.mapper.SinglesPlayerMapper;
 
 @Service
 @Transactional
-public class RegisterSinglesPlayerService {
+public class RegisterDoublesPlayerService {
 
+	@Autowired
+	private DoublesPlayerMapper doublesPlayerMapper;
+	
 	@Autowired
 	private SinglesPlayerMapper singlesPlayerMapper;
 	
 	@Autowired
 	private UploadPathConfiguration uploadPathConfiguration;
 	
-	public void registerSinglesPlayer(RegisterSinglesPlayerForm form, MultipartFile uploadFile) {
-		
-		SinglesPlayer singlesPlayer = new SinglesPlayer();
-		singlesPlayer.setSinglesPlayerName(form.getSinglesPlayerName());
-		
+	public void registerDoublesPlayer(RegisterDoublesPlayerForm form, MultipartFile uploadFile) {
+		DoublesPlayer doublesPlayer = new DoublesPlayer();
+		SinglesPlayer player1 = singlesPlayerMapper.load(form.getDoublesPlayerId1());
+		SinglesPlayer player2 = singlesPlayerMapper.load(form.getDoublesPlayerId2());
+		doublesPlayer.setDoublesPlayerName(player1.getSinglesPlayerName() + "・" + player2.getSinglesPlayerName());
 		//画像チェック
     	if (uploadFile != null) {
 			
@@ -74,7 +80,7 @@ public class RegisterSinglesPlayerService {
 				File fileName = new File(uploadFile.getOriginalFilename());
 	            String imagePath = fileName.toString();
 				
-				singlesPlayer.setImagePath(imagePath);
+	            doublesPlayer.setImagePath(imagePath);
 	            
 			} catch (Exception exception) {
 				
@@ -83,9 +89,10 @@ public class RegisterSinglesPlayerService {
 
 			}
 		}
-    	
-    	singlesPlayerMapper.registerSinglesPlayer(singlesPlayer);
-    	
+		doublesPlayerMapper.registerDoublesPlayer(doublesPlayer);
+		
+		singlesPlayerMapper.updateSinglesPlayer(form.getDoublesPlayerId1(),form.getDoublesPlayerId2());
+		singlesPlayerMapper.updateSinglesPlayer(form.getDoublesPlayerId2(),form.getDoublesPlayerId1());
 	}
 	
 }

@@ -27,9 +27,35 @@ public class ShowPlayersService {
 	@Autowired
 	private UploadPathConfiguration uploadPathConfiguration;
 	
+	@Autowired
+	private SinglesPlayerMapper singlesPlayerMapper;
+	
+	/**
+	 * ダブルスの選手を登録する際に選手全員を返すサービス.
+	 * 
+	 * @return 選手一覧
+	 */
+	public List<SinglesPlayer> findAllPlayer() {
+		return singlesPlayerMapper.findAllPlayer();
+	}
+	
+	/**
+	 * ダブルスの選手を登録する際に選ばれた人以外の選手を返すサービス.
+	 * 
+	 * @param singlesPlayerId シングルスプレイヤーID
+	 * @return 選手一覧
+	 */
+	public List<SinglesPlayer> findPlayerExceptByPlayerId(Integer singlesPlayerId) {
+		return singlesPlayerMapper.findPlayerExceptByPlayerId(singlesPlayerId);
+	}
+	
+	/**
+	 * 選手一覧を表示するサービス.
+	 * 
+	 * @return 選手DTO
+	 */
 	public List<PlayerListDto> findAll() {
 		List<PlayerListDto> playerListDtoList = new ArrayList<>();
-		
 		
 		List<SinglesPlayer> singlesPlayerList = playerMapper.findAll();
 		for(SinglesPlayer player : singlesPlayerList) {
