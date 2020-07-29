@@ -12,9 +12,9 @@ spring:
   # DBの設定(デプロイ環境)
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: spring.datasource.url=jdbc:postgresql://ec2-50-16-198-4.compute-1.amazonaws.com:5432/d72hh6hk3gm0l4?sslmode=require
-    username: sxutlquffhrxzv
-    password: a1fa84bdc2546be64a2fc7ba68fdb984f1563f5c1326d61bf0d082ccfb864823
+    url: spring.datasource.url=jdbc:postgresql://ec2-18-235-109-97.compute-1.amazonaws.com:5432/d5loi6p1e92q7u?sslmode=require
+    username: klwtwkzzwmnenh
+    password: 1c15324ee7e1365371252ce1f59a88d3bb39ba72afcb684119edc28a9e7b1c0b
 
 # ローカル環境での起動ポート番号の設定
 server:
