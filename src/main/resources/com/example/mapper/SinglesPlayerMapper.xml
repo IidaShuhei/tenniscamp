@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SinglesPlayerMapper">
+
+	<resultMap type="com.example.domain.SinglesPlayer" id="SinglesPlayerResultMap">
+		<id property="singlesPlayerId" column="s_singles_player_id" />
+		<result property="singlesPlayerName" column="singles_player_name" />
+		<result property="imagePath" column="s_image_path" />
+		<result property="doublesPlayerId" column="s_doubles_player_id" />
+		<association property="doublesPlayer" javaType="com.example.domain.DoublesPlayer">
+			<id property="doublesPlayerId" column="d_doubles_player_id" />
+			<result property="doublesPlayerName" column="doubles_player_name" />
+			<result property="imagePath" column="d_image_path" />
+		</association>
+		<collection property="singlesScoreList" ofType="com.example.domain.SinglesScore">
+			<id property="singlesScoreId" column="singles_score_id" />
+			<result property="singlesPlayerId" column="ss_singles_player_id" />
+			<result property="opponentSinglesPlayerId" column="opponent_singles_player_id" />
+			<result property="matchScore" column="ss_match_score" />
+			<result property="mission" column="ss_mission" />
+			<result property="registerDate" column="ss_register_date" />
+		</collection>
+		<collection property="doublesScoreList" ofType="com.example.domain.DoublesScore">
+			<id property="doublesScoreId" column="doubles_score_id" />
+			<result property="doublesPlayerId" column="dd_doubles_player_id" />
+			<result property="opponentDoublesPlayerId" column="opponent_doubles_player_id" />
+			<result property="matchScore" column="dd_match_score" />
+			<result property="mission" column="dd_mission" />
+			<result property="registerDate" column="dd_register_date" />
+		</collection>
+	</resultMap>
+
+	<select id="findAll" parameterType="int" resultMap="SinglesPlayerResultMap">
+		SELECT 
+		s.singles_player_id s_singles_player_id,
+		singles_player_name,
+		s.image_path s_image_path,
+		s.doubles_player_id s_doubles_player_id,
+		d.doubles_player_id d_doubles_player_id,
+		doubles_player_name,
+		d.image_path d_image_path,
+		singles_score_id,
+		ss.singles_player_id ss_singles_player_id,
+		opponent_singles_player_id,
+		ss.match_score ss_match_score,
+		ss.mission ss_mission,
+		ss.register_date ss_register_date,
+		doubles_score_id,
+		dd.doubles_player_id dd_doubles_player_id,
+		opponent_doubles_player_id,
+		dd.match_score dd_match_score,
+		dd.mission dd_mission,
+		dd.register_date dd_register_date
+		FROM singles_players AS s
+		LEFT OUTER JOIN doubles_players AS d ON s.doubles_player_id = d.doubles_player_id
+		LEFT OUTER JOIN singles_scores AS ss ON s.singles_player_id = ss.singles_player_id
+		LEFT OUTER JOIN doubles_scores AS dd ON d.doubles_player_id = dd.doubles_player_id
+	</select>
+	
+	<insert id="registerSinglesPlayer">
+		INSERT INTO singles_players(singles_player_name,image_path)VALUES(#{singlesPlayerName},#{imagePath})
+	</insert>
+	
+</mapper>
