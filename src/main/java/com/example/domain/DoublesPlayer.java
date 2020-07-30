@@ -9,7 +9,7 @@ public class DoublesPlayer {
 
 	private Integer doublesPlayerId;
 	private String doublesPlayerName;
-	private String imagePath;
+//	private String imagePath;
 	private List<DoublesScore> doublesScoreList;
 	
 }

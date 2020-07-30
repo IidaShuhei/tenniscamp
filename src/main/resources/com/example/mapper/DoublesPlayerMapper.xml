@@ -5,11 +5,21 @@
 	<resultMap type="com.example.domain.DoublesPlayer" id="DoublesPlayersResultMap">
 		<id property="doublesPlayerId" column="doubles_player_id" />
 		<result property="doublesPlayerName" column="doubles_player_name" />
-		<result property="imagePath" column="image_path" />
+<!-- 		<result property="imagePath" column="image_path" /> -->
 	</resultMap>
 
 	<select id="registerDoublesPlayer" resultType="int">
-		INSERT INTO doubles_players(doubles_player_name,image_path)VALUES(#{doublesPlayerName},#{imagePath}) returning doubles_player_id
+		INSERT INTO doubles_players
+		(
+		doubles_player_name
+<!-- 		image_path -->
+		)
+		VALUES
+		(
+		#{doublesPlayerName}
+<!-- 		#{imagePath} -->
+		) 
+		returning doubles_player_id
 	</select>
 	
 	<select id="findAllDoublesPlayer" resultMap="DoublesPlayersResultMap">
@@ -24,7 +34,7 @@
 	<resultMap type="com.example.domain.DoublesPlayer" id="DoublesPlayerResultMap">
 		<id property="doublesPlayerId" column="d_doubles_player_id" />
 		<result property="doublesPlayerName" column="doubles_player_name" />
-		<result property="imagePath" column="image_path" />
+<!-- 		<result property="imagePath" column="image_path" /> -->
 		<collection property="doublesScoreList" ofType="com.example.domain.DoublesScore">
 			<id property="doublesScoreId" column="doubles_score_id" />
 			<result property="doublesPlayerId" column="ds_doubles_player_id" />
@@ -40,7 +50,7 @@
 		SELECT 
 		d.doubles_player_id d_doubles_player_id,
 		doubles_player_name,
-		image_path,
+<!-- 		image_path, -->
 		doubles_score_id,
 		ds.doubles_player_id ds_doubles_player_id,
 		opponent_doubles_player_id,

@@ -5,7 +5,7 @@
 	<resultMap type="com.example.domain.SinglesPlayer" id="SinglesPlayerResultMap">
 		<id property="singlesPlayerId" column="s_singles_player_id" />
 		<result property="singlesPlayerName" column="singles_player_name" />
-		<result property="imagePath" column="s_image_path" />
+<!-- 		<result property="imagePath" column="s_image_path" /> -->
 		<result property="doublesPlayerId" column="s_doubles_player_id" />
 		<collection property="singlesScoreList" ofType="com.example.domain.SinglesScore">
 			<id property="singlesScoreId" column="singles_score_id" />
@@ -22,7 +22,7 @@
 		SELECT 
 		s.singles_player_id s_singles_player_id,
 		singles_player_name,
-		s.image_path s_image_path,
+<!-- 		s.image_path s_image_path, -->
 		s.doubles_player_id s_doubles_player_id,
 		singles_score_id,
 		ss.singles_player_id ss_singles_player_id,
@@ -39,12 +39,16 @@
 	<resultMap type="com.example.domain.SinglesPlayer" id="SinglesPlayersResultMap">
 		<id property="singlesPlayerId" column="singles_player_id" />
 		<result property="singlesPlayerName" column="singles_player_name" />
-		<result property="imagePath" column="image_path" />
+<!-- 		<result property="imagePath" column="image_path" /> -->
 		<result property="doublesPlayerId" column="doubles_player_id" />
 	</resultMap>
 	
 	<insert id="registerSinglesPlayer">
-		INSERT INTO singles_players(singles_player_name,image_path)VALUES(#{singlesPlayerName},#{imagePath})
+		INSERT INTO singles_players(singles_player_name
+<!-- 		image_path -->
+		)VALUES(#{singlesPlayerName}
+<!-- 		,#{imagePath} -->
+		)
 	</insert>
 	
 	<update id="updateSinglesPlayer">

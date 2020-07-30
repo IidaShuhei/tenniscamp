@@ -2,6 +2,7 @@ package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -19,8 +20,14 @@ public class RegisterDoublesPlayerController {
 	private RegisterDoublesPlayerService registerDoublesPlayerService;
 	
 	@PostMapping("/registerDoublesPlayer")
-	public void registerDoublesPlayer(@RequestPart("obj") RegisterDoublesPlayerForm form, @RequestParam(value = "file", required = false) MultipartFile uploadFile) {
-		registerDoublesPlayerService.registerDoublesPlayer(form,uploadFile);
+	public void registerDoublesPlayer(
+//			@RequestPart("obj")
+	@RequestBody RegisterDoublesPlayerForm form
+//	, @RequestParam(value = "file", required = false) MultipartFile uploadFile
+	) {
+		registerDoublesPlayerService.registerDoublesPlayer(form
+//				,uploadFile
+				);
 	}
 	
 }
