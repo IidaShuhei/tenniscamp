@@ -18,6 +18,10 @@
 	
 	<select id="findAll" resultMap="SinglesScoreResultMap">
 		SELECT * FROM singles_scores
-	</select>	
+	</select>
+	
+	<delete id="deleteSinglesResult">
+		DELETE FROM singles_scores WHERE singles_player_id = #{singlesPlayerId} AND opponent_singles_player_id =#{opponentSinglesPlayerId}
+	</delete>	
 
 </mapper>

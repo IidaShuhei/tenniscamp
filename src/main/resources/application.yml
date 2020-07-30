@@ -4,17 +4,17 @@ spring:
 #   ansi:
 #     enabled: always
   # DBの設定(デプロイ時に変更)
-#  datasource:
-#    driverClassName: org.postgresql.Driver
-#    url: jdbc:postgresql://localhost:5432/tenniscamp
-#    username: postgres
-#    password: postgres
-  # DBの設定(デプロイ環境)
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: spring.datasource.url=jdbc:postgresql://ec2-35-175-155-248.compute-1.amazonaws.com:5432/d16rkbnmiaq6g6?sslmode=require
-    username: escrfdqmoxvbgf
-    password: dbd4739c9481d694c062eca839e58bf960877aa9ac3b46dd93dde3d9b1aaee69
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/tenniscamp
+    username: postgres
+    password: postgres
+  # DBの設定(デプロイ環境)
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: spring.datasource.url=jdbc:postgresql://ec2-35-175-155-248.compute-1.amazonaws.com:5432/d16rkbnmiaq6g6?sslmode=require
+#    username: escrfdqmoxvbgf
+#    password: dbd4739c9481d694c062eca839e58bf960877aa9ac3b46dd93dde3d9b1aaee69
 
 # ローカル環境での起動ポート番号の設定
 server:
@@ -23,9 +23,9 @@ server:
 # 環境変数(デプロイ時に変更)
 #ローカル環境のOrigin
 environments:
-#  originUrl: http://localhost:8888
+  originUrl: http://localhost:8888
   
-  originUrl: https://tenniscamp-782ef.web.app
+#  originUrl: https://tenniscamp-782ef.web.app/
 
 path:
   uploadPath: "src/main/resources/static/images/"

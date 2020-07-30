@@ -24,4 +24,8 @@
 		SELECT * FROM doubles_scores
 	</select>
 	
+	<delete id="deleteDoublesResult">
+		DELETE FROM doubles_scores WHERE doubles_player_id = #{doublesPlayerId} AND opponent_doubles_player_id =#{opponentDoublesPlayerId}
+	</delete>
+	
 </mapper>

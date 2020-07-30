@@ -13,4 +13,6 @@ public interface SinglesScoreMapper {
 	
 	List<SinglesScore> findAll();
 	
+	void deleteSinglesResult(Integer singlesPlayerId, Integer opponentSinglesPlayerId);
+	
 }

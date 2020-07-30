@@ -15,4 +15,6 @@ public interface DoublesScoreMapper {
 	
 	List<DoublesScore> findAll();
 	
+	void deleteDoublesResult(Integer doublesPlayerId, Integer opponentDoublesPlayerId);
+	
 }
