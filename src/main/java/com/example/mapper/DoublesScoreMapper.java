@@ -17,4 +17,8 @@ public interface DoublesScoreMapper {
 	
 	void deleteDoublesResult(Integer doublesPlayerId, Integer opponentDoublesPlayerId);
 	
+	DoublesScore findByBothId(Integer doublesPlayerId, Integer opponentDoublesPlayerId);
+	
+	DoublesScore findByBothReverseId(Integer opponentDoublesPlayerId, Integer doublesPlayerId);
+	
 }

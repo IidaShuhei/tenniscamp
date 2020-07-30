@@ -22,6 +22,14 @@
 	
 	<delete id="deleteSinglesResult">
 		DELETE FROM singles_scores WHERE singles_player_id = #{singlesPlayerId} AND opponent_singles_player_id =#{opponentSinglesPlayerId}
-	</delete>	
+	</delete>
+	
+	<select id="findByBothId" resultMap="SinglesScoreResultMap">
+		SELECT * FROM singles_scores WHERE singles_player_id = #{singlesPlayerId} AND opponent_singles_player_id =#{opponentSinglesPlayerId}
+	</select>
+	
+	<select id="findByBothReverseId" resultMap="SinglesScoreResultMap">
+		SELECT * FROM singles_scores WHERE singles_player_id = #{opponentSinglesPlayerId} AND opponent_singles_player_id =#{singlesPlayerId}
+	</select>
 
 </mapper>
