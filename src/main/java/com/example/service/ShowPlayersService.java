@@ -268,33 +268,33 @@ public class ShowPlayersService {
 		List<SinglesPlayer> singlesPlayerList = singlesPlayerMapper.findAll();
 		for(SinglesPlayer player : singlesPlayerList) {
 			PlayerListDto dto = new PlayerListDto();
-			String imagePath = player.getImagePath();
-			String uploadPath = uploadPathConfiguration.getUploadPath() + imagePath;
-			try (FileInputStream fis = new FileInputStream(uploadPath);) {
-				StringBuffer data = new StringBuffer();
-				ByteArrayOutputStream os = new ByteArrayOutputStream();
-				byte[] buffer = new byte[1024];
-				// バイト配列に変換
-				while (true) {
-					int len = fis.read(buffer);
-					if (len < 0) {
-						break;
-					}
-					os.write(buffer, 0, len);
-				}
-				// 画像データをbaseにエンコード
-				String base64 = new String(
-						org.apache.tomcat.util.codec.binary.Base64.encodeBase64(os.toByteArray()),"ASCII");
-				// 画像タイプはJPEG
-				data.append("data:image/jpeg;base64,");
-				data.append(base64);
-				
-				dto.setImagePath(data.toString());
-				
-			} catch (Exception e) {     
-				e.printStackTrace();
-				return null;
-			}
+//			String imagePath = player.getImagePath();
+//			String uploadPath = uploadPathConfiguration.getUploadPath() + imagePath;
+//			try (FileInputStream fis = new FileInputStream(uploadPath);) {
+//				StringBuffer data = new StringBuffer();
+//				ByteArrayOutputStream os = new ByteArrayOutputStream();
+//				byte[] buffer = new byte[1024];
+//				// バイト配列に変換
+//				while (true) {
+//					int len = fis.read(buffer);
+//					if (len < 0) {
+//						break;
+//					}
+//					os.write(buffer, 0, len);
+//				}
+//				// 画像データをbaseにエンコード
+//				String base64 = new String(
+//						org.apache.tomcat.util.codec.binary.Base64.encodeBase64(os.toByteArray()),"ASCII");
+//				// 画像タイプはJPEG
+//				data.append("data:image/jpeg;base64,");
+//				data.append(base64);
+//				
+//				dto.setImagePath(data.toString());
+//				
+//			} catch (Exception e) {     
+//				e.printStackTrace();
+//				return null;
+//			}
 			
 			int totalWin = 0;
 			int totalLose = 0;
