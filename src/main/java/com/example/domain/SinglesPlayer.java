@@ -11,7 +11,6 @@ public class SinglesPlayer {
 	private String singlesPlayerName;
 	private String imagePath;
 	private Integer doublesPlayerId;
-	private DoublesPlayer doublesPlayer;
 	private List<SinglesScore> singlesScoreList;
-	private List<DoublesScore> doublesScoreList;
+	
 }

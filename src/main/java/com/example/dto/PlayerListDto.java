@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class PlayerListDto {
 
-	private Integer singlesPlayerId;
-	private String singlesPlayerName;
+	private Integer playerId;
+	private String playerName;
 	private String imagePath;
 	private Integer totalWin;
 	private Integer totalLose;

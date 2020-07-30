@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.domain.DoublesPlayer;
 import com.example.domain.SinglesPlayer;
 import com.example.dto.PlayerListDto;
+import com.example.dto.ResultListDto;
 import com.example.service.ShowPlayersService;
 
 @RestController
@@ -24,14 +26,54 @@ public class ShowPlayersController {
 		return showPlayersService.findAllPlayer();
 	}
 	
+	@GetMapping("/showAllSinglesPlayers")
+	public List<SinglesPlayer> findAllSinglesPlayers() {
+		return showPlayersService.findAllSinglesPlayers();
+	}
+	
 	@GetMapping("/showPlayersExceptSinglesPlayerId")
 	public List<SinglesPlayer> findPlayerExceptByPlayerId(@RequestParam Integer singlesPlayerId) {
 		return showPlayersService.findPlayerExceptByPlayerId(singlesPlayerId);
 	}
 	
+	@GetMapping("/findPlayersExceptSinglesPlayerId")
+	public List<SinglesPlayer> findPlayersExceptSinglesPlayerId(@RequestParam Integer singlesPlayerId) {
+		return showPlayersService.findPlayersExceptSinglesPlayerId(singlesPlayerId);
+	}
+	
+	@GetMapping("/showSinglesPlayers")
+	public List<PlayerListDto> findAllSinglesPlayer() {
+		return showPlayersService.findAllSinglesPlayer();
+	}
+	
+	@GetMapping("/showDoublesPlayers")
+	public List<PlayerListDto> findAllDoublesPlayer() {
+		return showPlayersService.findAllDoublesPlayer();
+	}
+	
+	@GetMapping("/showAllDoublesPlayer")
+	public List<DoublesPlayer> findAllDoublesPlayers() {
+		return showPlayersService.findAllDoublesPlayers();
+	}
+	
+	@GetMapping("/showPlayersExceptDoublesPlayerId")
+	public List<DoublesPlayer> findPlayersExceptDoublesPlayerId(@RequestParam Integer doublesPlayerId) {
+		return showPlayersService.findPlayersExceptDoublesPlayerId(doublesPlayerId);
+	}
+	
 	@GetMapping("/showPlayers")
-	public List<PlayerListDto> findAll() {
-		return showPlayersService.findAll();
+	public List<PlayerListDto> findAllPlayers() {
+		return showPlayersService.findAllPlayers();
+	}
+	
+	@GetMapping("/showSinglesResult")
+	public List<ResultListDto> findSinglesResult() {
+		return showPlayersService.findSinglesResult();
+	}
+	
+	@GetMapping("/showDoublesResult")
+	public List<ResultListDto> findDoublesResult() {
+		return showPlayersService.findDoublesResult();
 	}
 	
 }

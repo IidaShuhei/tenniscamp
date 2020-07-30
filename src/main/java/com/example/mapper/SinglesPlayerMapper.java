@@ -13,6 +13,8 @@ public interface SinglesPlayerMapper {
 	void registerSinglesPlayer(SinglesPlayer singlesPlayer);
 	void updateSinglesPlayer(Integer doublesPlayerId, Integer singlesPlayerId);
 	List<SinglesPlayer> findAllPlayer();
+	List<SinglesPlayer> findAllSinglesPlayers();
 	List<SinglesPlayer> findPlayerExceptByPlayerId(Integer singlesPlayerId);
+	List<SinglesPlayer> findPlayersExceptSinglesPlayerId(Integer singlesPlayerId);
 	SinglesPlayer load(Integer singlesPlayerId);
 }

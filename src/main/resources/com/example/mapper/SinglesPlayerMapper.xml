@@ -7,26 +7,14 @@
 		<result property="singlesPlayerName" column="singles_player_name" />
 		<result property="imagePath" column="s_image_path" />
 		<result property="doublesPlayerId" column="s_doubles_player_id" />
-		<association property="doublesPlayer" javaType="com.example.domain.DoublesPlayer">
-			<id property="doublesPlayerId" column="d_doubles_player_id" />
-			<result property="doublesPlayerName" column="doubles_player_name" />
-			<result property="imagePath" column="d_image_path" />
-		</association>
 		<collection property="singlesScoreList" ofType="com.example.domain.SinglesScore">
 			<id property="singlesScoreId" column="singles_score_id" />
 			<result property="singlesPlayerId" column="ss_singles_player_id" />
 			<result property="opponentSinglesPlayerId" column="opponent_singles_player_id" />
-			<result property="matchScore" column="ss_match_score" />
+			<result property="myMatchScore" column="ss_my_match_score" />
+			<result property="opponentMatchScore" column="ss_opponent_match_score" />
 			<result property="mission" column="ss_mission" />
 			<result property="registerDate" column="ss_register_date" />
-		</collection>
-		<collection property="doublesScoreList" ofType="com.example.domain.DoublesScore">
-			<id property="doublesScoreId" column="doubles_score_id" />
-			<result property="doublesPlayerId" column="dd_doubles_player_id" />
-			<result property="opponentDoublesPlayerId" column="opponent_doubles_player_id" />
-			<result property="matchScore" column="dd_match_score" />
-			<result property="mission" column="dd_mission" />
-			<result property="registerDate" column="dd_register_date" />
 		</collection>
 	</resultMap>
 
@@ -36,25 +24,15 @@
 		singles_player_name,
 		s.image_path s_image_path,
 		s.doubles_player_id s_doubles_player_id,
-		d.doubles_player_id d_doubles_player_id,
-		doubles_player_name,
-		d.image_path d_image_path,
 		singles_score_id,
 		ss.singles_player_id ss_singles_player_id,
 		opponent_singles_player_id,
-		ss.match_score ss_match_score,
+		ss.my_match_score ss_my_match_score,
+		ss.opponent_match_score ss_opponent_match_score,
 		ss.mission ss_mission,
-		ss.register_date ss_register_date,
-		doubles_score_id,
-		dd.doubles_player_id dd_doubles_player_id,
-		opponent_doubles_player_id,
-		dd.match_score dd_match_score,
-		dd.mission dd_mission,
-		dd.register_date dd_register_date
+		ss.register_date ss_register_date
 		FROM singles_players AS s
-		LEFT OUTER JOIN doubles_players AS d ON s.doubles_player_id = d.doubles_player_id
 		LEFT OUTER JOIN singles_scores AS ss ON s.singles_player_id = ss.singles_player_id
-		LEFT OUTER JOIN doubles_scores AS dd ON d.doubles_player_id = dd.doubles_player_id
 	</select>
 	
 	
@@ -77,12 +55,20 @@
 		SELECT * FROM singles_players WHERE doubles_player_id IS NULL
 	</select>
 	
+	<select id="findAllSinglesPlayers" resultMap="SinglesPlayersResultMap">
+		SELECT * FROM singles_players
+	</select>
+	
 	<select id="load" resultMap="SinglesPlayersResultMap">
 		SELECT * FROM singles_players WHERE singles_player_id = #{singlesPlayerId}
 	</select>
 	
 	<select id="findPlayerExceptByPlayerId" parameterType="int" resultMap="SinglesPlayersResultMap">
 		<![CDATA[ SELECT * FROM singles_players WHERE singles_player_id <> #{singlesPlayerId} AND doubles_player_id IS NULL ]]>
+	</select>
+	
+	<select id="findPlayersExceptSinglesPlayerId" parameterType="int" resultMap="SinglesPlayersResultMap">
+		<![CDATA[ SELECT * FROM singles_players WHERE singles_player_id <> #{singlesPlayerId} ]]>
 	</select>
 	
 </mapper>

@@ -1,18 +1,15 @@
-package com.example.domain;
-
-import java.sql.Timestamp;
+package com.example.form;
 
 import lombok.Data;
 
 @Data
-public class DoublesScore {
+public class RegisterDoublesScoreForm {
 
-	private Integer doublesScoreId;
 	private Integer doublesPlayerId;
 	private Integer opponentDoublesPlayerId;
 	private Integer myMatchScore;
 	private Integer opponentMatchScore;
-	private Integer mission;
-	private Timestamp registerDate;
+	private Integer mustMission;
+	private Integer addMission;
 	
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SinglesScoreMapper">
+
+	<resultMap type="com.example.domain.SinglesScore" id="SinglesScoreResultMap">
+		<id property="singlesScoreId" column="singles_score_id" />
+		<result property="singlesPlayerId" column="singles_player_id" />
+		<result property="opponentSinglesPlayerId" column="opponent_singles_player_id" />
+		<result property="myMatchScore" column="my_match_score" />
+		<result property="opponentMatchScore" column="opponent_match_score" />
+		<result property="mission" column="mission" />
+		<result property="registerDate" column="register_date" />
+	</resultMap>
+
+	<insert id="registerSinglesScore">
+		INSERT INTO singles_scores(singles_player_id,opponent_singles_player_id,my_match_score,opponent_match_score,mission,register_date)VALUES(#{singlesPlayerId},#{opponentSinglesPlayerId},#{myMatchScore},#{opponentMatchScore},#{mission},#{registerDate})
+	</insert>
+	
+	<select id="findAll" resultMap="SinglesScoreResultMap">
+		SELECT * FROM singles_scores
+	</select>	
+
+</mapper>

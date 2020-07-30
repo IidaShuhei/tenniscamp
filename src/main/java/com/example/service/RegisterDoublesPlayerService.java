@@ -89,10 +89,10 @@ public class RegisterDoublesPlayerService {
 
 			}
 		}
-		doublesPlayerMapper.registerDoublesPlayer(doublesPlayer);
+		Integer doublesPlayerId = doublesPlayerMapper.registerDoublesPlayer(doublesPlayer);
 		
-		singlesPlayerMapper.updateSinglesPlayer(form.getDoublesPlayerId1(),form.getDoublesPlayerId2());
-		singlesPlayerMapper.updateSinglesPlayer(form.getDoublesPlayerId2(),form.getDoublesPlayerId1());
+		singlesPlayerMapper.updateSinglesPlayer(doublesPlayerId,form.getDoublesPlayerId2());
+		singlesPlayerMapper.updateSinglesPlayer(doublesPlayerId,form.getDoublesPlayerId1());
 	}
 	
 }

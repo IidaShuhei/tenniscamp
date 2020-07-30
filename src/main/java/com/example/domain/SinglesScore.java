@@ -10,7 +10,8 @@ public class SinglesScore {
 	private Integer singlesScoreId;
 	private Integer singlesPlayerId;
 	private Integer opponentSinglesPlayerId;
-	private Integer matchScore;
+	private Integer myMatchScore;
+	private Integer opponentMatchScore;
 	private Integer mission;
 	private Timestamp registerDate;
 	

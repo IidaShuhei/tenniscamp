@@ -9,11 +9,11 @@ CREATE TABLE doubles_players(doubles_player_id SERIAL PRIMARY KEY, doubles_playe
 
 --シングルス得点テーブルを作成します。
 DROP TABLE IF EXISTS singles_scores;
-CREATE TABLE singles_scores(singles_score_id SERIAL PRIMARY KEY, singles_player_id Integer NOT NULL, opponent_singles_player_id Integer NOT NULL, match_score Integer NOT NULL, mission Integer, register_date timestamp NOT NULL);
+CREATE TABLE singles_scores(singles_score_id SERIAL PRIMARY KEY, singles_player_id Integer NOT NULL, opponent_singles_player_id Integer NOT NULL, my_match_score Integer NOT NULL, opponent_match_score Integer NOT NULL,mission Integer, register_date timestamp NOT NULL);
 
 --ダブルス得点テーブルを作成します。
 DROP TABLE IF EXISTS doubles_scores;
-CREATE TABLE doubles_scores(doubles_score_id SERIAL PRIMARY KEY, doubles_player_id Integer NOT NULL, opponent_doubles_player_id Integer NOT NULL, match_score Integer NOT NULL, mission Integer, register_date timestamp NOT NULL);
+CREATE TABLE doubles_scores(doubles_score_id SERIAL PRIMARY KEY, doubles_player_id Integer NOT NULL, opponent_doubles_player_id Integer NOT NULL, my_match_score Integer NOT NULL, opponent_match_score Integer NOT NULL, mission Integer, register_date timestamp NOT NULL);
 
 --プレイヤーテーブルにインサート
 INSERT INTO singles_players(singles_player_name,doubles_player_id)VALUES('いいだ',1);

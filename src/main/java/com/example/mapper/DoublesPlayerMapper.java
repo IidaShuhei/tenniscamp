@@ -1,5 +1,7 @@
 package com.example.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.domain.DoublesPlayer;
@@ -7,6 +9,9 @@ import com.example.domain.DoublesPlayer;
 @Mapper
 public interface DoublesPlayerMapper {
 
-	void registerDoublesPlayer(DoublesPlayer doublesPlayer);
+	Integer registerDoublesPlayer(DoublesPlayer doublesPlayer);
+	List<DoublesPlayer> findAllDoublesPlayer();
+	List<DoublesPlayer> findPlayersExceptDoublesPlayerId(Integer doublesPlayerId);
+	List<DoublesPlayer> findAll();
 	
 }
