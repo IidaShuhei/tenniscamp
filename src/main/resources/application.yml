@@ -23,9 +23,9 @@ server:
 # 環境変数(デプロイ時に変更)
 #ローカル環境のOrigin
 environments:
-  originUrl: http://localhost:8888
+#  originUrl: http://localhost:8888
   
-#  originUrl: https://tenniscamp-782ef.web.app/
+  originUrl: https://tenniscamp-app.web.app
 
 path:
   uploadPath: "src/main/resources/static/images/"
