@@ -48,12 +48,10 @@ public class RegisterDoublesScoreService {
 				doublesScore.setMyMatchScore(form.getMyMatchScore());
 				doublesScore.setOpponentMatchScore(form.getOpponentMatchScore());
 
-				Integer totalMission = 0;
-				Integer mustMission = form.getMustMission();
-				Integer addMission = form.getAddMission();
-				totalMission = mustMission + addMission;
+//				Integer mission = form.getMission();
+//				Integer addMission = form.getAddMission();
 
-				doublesScore.setMission(totalMission);
+				doublesScore.setMission(form.getMission());
 				doublesScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
 				doublesScoreMapper.registerDoublesScore(doublesScore);
 				

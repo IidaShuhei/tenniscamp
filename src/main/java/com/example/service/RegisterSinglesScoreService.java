@@ -51,12 +51,12 @@ public class RegisterSinglesScoreService {
 				singlesScore.setMyMatchScore(form.getMyMatchScore());
 				singlesScore.setOpponentMatchScore(form.getOpponentMatchScore());
 
-				Integer totalMission = 0;
-				Integer mustMission = form.getMustMission();
-				Integer addMission = form.getAddMission();
-				totalMission = mustMission + addMission;
-
-				singlesScore.setMission(totalMission);
+//				Integer totalMission = 0;
+//				Integer mustMission = form.getMustMission();
+//				Integer addMission = form.getAddMission();
+//				totalMission = mustMission + addMission;
+				
+				singlesScore.setMission(form.getMission());
 				singlesScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
 				singlesScoreMapper.registerSinglesScore(singlesScore);
 

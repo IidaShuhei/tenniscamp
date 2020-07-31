@@ -157,7 +157,7 @@ public class ShowPlayersService {
 				}
 				
 			}
-			totalScore = (totalWin * 5) + totalMission;
+			totalScore = (totalWin * 7) + totalMission;
 			dto.setTotalWin(totalWin);
 			dto.setTotalLose(totalLose);
 			dto.setTotalMission(totalMission);
@@ -236,7 +236,7 @@ public class ShowPlayersService {
 				}
 				
 			}
-			totalScore = (totalWin * 5) + totalMission;
+			totalScore = (totalWin * 7) + totalMission;
 			dto.setTotalWin(totalWin);
 			dto.setTotalLose(totalLose);
 			dto.setTotalMission(totalMission);
