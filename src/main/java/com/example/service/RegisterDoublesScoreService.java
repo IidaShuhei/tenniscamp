@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.common.exception.BadRequestException;
 import com.example.domain.DoublesScore;
-import com.example.domain.SinglesScore;
 import com.example.form.RegisterDoublesScoreForm;
 import com.example.mapper.DoublesScoreMapper;
 
@@ -19,16 +17,16 @@ public class RegisterDoublesScoreService {
 	@Autowired
 	private DoublesScoreMapper doublesScoreMapper;
 
-	public void registerDoublesScore(RegisterDoublesScoreForm form) {
+	public Integer registerDoublesScore(RegisterDoublesScoreForm form) {
 		DoublesScore doublesScore = new DoublesScore();
 
 		if (!form.getMyMatchScore().equals(4) && !form.getOpponentMatchScore().equals(4)) {
 
-			throw new BadRequestException("どっちが勝ったん⁉︎");
+			return 1;
 
 		} else if (form.getMyMatchScore().equals(4) && form.getOpponentMatchScore().equals(4)) {
 
-			throw new BadRequestException("どっちが勝ったん⁉︎");
+			return 1;
 
 		} else {
 
@@ -37,11 +35,11 @@ public class RegisterDoublesScoreService {
 
 			if (existScore != null) {
 
-				throw new BadRequestException("その試合結果登録済み");
+				return 2;
 				
 			} else if (reverseScore != null && (reverseScore.getMyMatchScore() != form.getOpponentMatchScore() || reverseScore.getOpponentMatchScore() != form.getMyMatchScore())) {
 
-				throw new BadRequestException("スコアが違うぞ");
+				return 3;
 
 			} else {
 
@@ -58,6 +56,8 @@ public class RegisterDoublesScoreService {
 				doublesScore.setMission(totalMission);
 				doublesScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
 				doublesScoreMapper.registerDoublesScore(doublesScore);
+				
+				return 4;
 			}
 		}
 	}

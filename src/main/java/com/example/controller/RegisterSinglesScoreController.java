@@ -17,8 +17,8 @@ public class RegisterSinglesScoreController {
 	private RegisterSinglesScoreService registerSinglesScoreService;
 	
 	@PostMapping("/registerSinglesScore")
-	public void registerSinglesScore(@RequestBody RegisterSinglesScoreForm form) {
-		registerSinglesScoreService.registerSinglesScore(form);
+	public Integer registerSinglesScore(@RequestBody RegisterSinglesScoreForm form) {
+		return registerSinglesScoreService.registerSinglesScore(form);
 	}
 	
 }

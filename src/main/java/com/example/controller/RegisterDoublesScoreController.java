@@ -17,8 +17,8 @@ public class RegisterDoublesScoreController {
 	private RegisterDoublesScoreService registerDoublesScoreService;
 	
 	@PostMapping("/registerDoublesScore")
-	public void registerDoublesScore(@RequestBody RegisterDoublesScoreForm form) {
-		registerDoublesScoreService.registerDoublesScore(form);
+	public Integer registerDoublesScore(@RequestBody RegisterDoublesScoreForm form) {
+		return registerDoublesScoreService.registerDoublesScore(form);
 	}
 	
 }
