@@ -9,7 +9,8 @@ public class RegisterSinglesScoreForm {
 	private Integer opponentSinglesPlayerId;
 	private Integer myMatchScore;
 	private Integer opponentMatchScore;
-	private Integer mission;
+	private Integer mission1;
+	private Integer mission2;
 //	private Integer addMission;
 	
 }

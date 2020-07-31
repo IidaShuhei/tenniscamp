@@ -1,7 +1,5 @@
 package com.example.service;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -79,7 +77,16 @@ public class ShowPlayersService {
 			dto.setOpponentId(score.getOpponentSinglesPlayerId());
 			dto.setPlayerScore(score.getMyMatchScore());
 			dto.setOpponentScore(score.getOpponentMatchScore());
+			
 			resultListDtoList.add(dto);
+			
+			for (int i = 0; i < resultListDtoList.size(); i++) {
+				if(resultListDtoList.get(i).getPlayerId().equals(dto.getOpponentId()) && resultListDtoList.get(i).getOpponentId().equals(dto.getPlayerId())) {
+					resultListDtoList.remove(i);
+				}
+			}
+			
+			
 		}
 		return resultListDtoList;
 	}
@@ -95,6 +102,12 @@ public class ShowPlayersService {
 			dto.setPlayerScore(score.getMyMatchScore());
 			dto.setOpponentScore(score.getOpponentMatchScore());
 			resultListDtoList.add(dto);
+			
+			for (int i = 0; i < resultListDtoList.size(); i++) {
+				if(resultListDtoList.get(i).getPlayerId().equals(dto.getOpponentId()) && resultListDtoList.get(i).getOpponentId().equals(dto.getPlayerId())) {
+					resultListDtoList.remove(i);
+				}
+			}
 		}
 		return resultListDtoList;
 	}

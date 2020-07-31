@@ -19,6 +19,7 @@ public class RegisterDoublesScoreService {
 
 	public Integer registerDoublesScore(RegisterDoublesScoreForm form) {
 		DoublesScore doublesScore = new DoublesScore();
+		DoublesScore doublesOpponentScore = new DoublesScore();
 
 		if (!form.getMyMatchScore().equals(4) && !form.getOpponentMatchScore().equals(4)) {
 
@@ -43,6 +44,7 @@ public class RegisterDoublesScoreService {
 
 			} else {
 
+				//自分たち
 				doublesScore.setDoublesPlayerId(form.getDoublesPlayerId());
 				doublesScore.setOpponentDoublesPlayerId(form.getOpponentDoublesPlayerId());
 				doublesScore.setMyMatchScore(form.getMyMatchScore());
@@ -51,9 +53,22 @@ public class RegisterDoublesScoreService {
 //				Integer mission = form.getMission();
 //				Integer addMission = form.getAddMission();
 
-				doublesScore.setMission(form.getMission());
+				doublesScore.setMission(form.getMission1());
 				doublesScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
 				doublesScoreMapper.registerDoublesScore(doublesScore);
+				
+				//相手チーム
+				doublesOpponentScore.setDoublesPlayerId(form.getOpponentDoublesPlayerId());
+				doublesOpponentScore.setOpponentDoublesPlayerId(form.getDoublesPlayerId());
+				doublesOpponentScore.setMyMatchScore(form.getOpponentMatchScore());
+				doublesOpponentScore.setOpponentMatchScore(form.getMyMatchScore());
+				
+//				Integer mission = form.getMission();
+//				Integer addMission = form.getAddMission();
+				
+				doublesOpponentScore.setMission(form.getMission2());
+				doublesOpponentScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
+				doublesScoreMapper.registerDoublesScore(doublesOpponentScore);
 				
 				return 4;
 			}

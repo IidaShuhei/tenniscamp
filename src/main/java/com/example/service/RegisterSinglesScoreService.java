@@ -20,6 +20,7 @@ public class RegisterSinglesScoreService {
 
 	public Integer registerSinglesScore(RegisterSinglesScoreForm form) throws BadRequestException {
 		SinglesScore singlesScore = new SinglesScore();
+		SinglesScore singlesOpponentScore = new SinglesScore();
 		if (!form.getMyMatchScore().equals(4) && !form.getOpponentMatchScore().equals(4)) {
 
 			return 1;
@@ -45,7 +46,8 @@ public class RegisterSinglesScoreService {
 				return 3;
 
 			} else {
-
+				
+				//自分のスコアを登録
 				singlesScore.setSinglesPlayerId(form.getSinglesPlayerId());
 				singlesScore.setOpponentSinglesPlayerId(form.getOpponentSinglesPlayerId());
 				singlesScore.setMyMatchScore(form.getMyMatchScore());
@@ -56,9 +58,27 @@ public class RegisterSinglesScoreService {
 //				Integer addMission = form.getAddMission();
 //				totalMission = mustMission + addMission;
 				
-				singlesScore.setMission(form.getMission());
+				singlesScore.setMission(form.getMission1());
 				singlesScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
+				
 				singlesScoreMapper.registerSinglesScore(singlesScore);
+				
+				//相手のスコアも登録
+				singlesOpponentScore.setSinglesPlayerId(form.getOpponentSinglesPlayerId());
+				singlesOpponentScore.setOpponentSinglesPlayerId(form.getSinglesPlayerId());
+				singlesOpponentScore.setMyMatchScore(form.getOpponentMatchScore());
+				singlesOpponentScore.setOpponentMatchScore(form.getMyMatchScore());
+				
+//				Integer totalMission = 0;
+//				Integer mustMission = form.getMustMission();
+//				Integer addMission = form.getAddMission();
+//				totalMission = mustMission + addMission;
+				
+				singlesOpponentScore.setMission(form.getMission2());
+				singlesOpponentScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
+				
+				singlesScoreMapper.registerSinglesScore(singlesOpponentScore);
+				
 
 				return 4;
 

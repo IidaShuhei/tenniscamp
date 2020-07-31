@@ -9,7 +9,8 @@ public class RegisterDoublesScoreForm {
 	private Integer opponentDoublesPlayerId;
 	private Integer myMatchScore;
 	private Integer opponentMatchScore;
-	private Integer mission;
+	private Integer mission1;
+	private Integer mission2;
 //	private Integer addMission;
 	
 }
