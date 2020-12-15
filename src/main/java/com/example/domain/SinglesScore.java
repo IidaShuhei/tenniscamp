@@ -2,6 +2,8 @@ package com.example.domain;
 
 import java.sql.Timestamp;
 
+import com.example.common.exception.BadRequestException;
+
 import lombok.Data;
 
 @Data
@@ -16,9 +18,9 @@ public class SinglesScore {
 	private Timestamp registerDate;
 
 	// 試合が重複になってないかチェック
-	public void checkMatch(SinglesScore existScore) throws Exception {
+	public void checkMatch(SinglesScore existScore) throws BadRequestException {
 		if (existScore != null) {
-			throw new Exception("その試合は登録済み");
+			throw new BadRequestException("その試合は登録済み");
 		}
 	}
 
