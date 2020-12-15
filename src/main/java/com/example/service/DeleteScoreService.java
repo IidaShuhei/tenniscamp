@@ -19,10 +19,12 @@ public class DeleteScoreService {
 	
 	public void deleteSinglesResult(Integer singlesPlayerId, Integer opponentSinglesPlayerId) {
 		singlesScoreMapper.deleteSinglesResult(singlesPlayerId, opponentSinglesPlayerId);
+		singlesScoreMapper.deleteSinglesResult(opponentSinglesPlayerId, singlesPlayerId);
 	}
 	
 	public void deleteDoublesResult(Integer doublesPlayerId, Integer opponentDoublesPlayerId) {
 		doublesScoreMapper.deleteDoublesResult(doublesPlayerId, opponentDoublesPlayerId);
+		doublesScoreMapper.deleteDoublesResult(opponentDoublesPlayerId, doublesPlayerId);
 	}
 	
 }

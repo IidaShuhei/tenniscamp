@@ -12,9 +12,11 @@ public interface SinglesPlayerMapper {
 	List<SinglesPlayer> findAll();
 	void registerSinglesPlayer(SinglesPlayer singlesPlayer);
 	void updateSinglesPlayer(Integer doublesPlayerId, Integer singlesPlayerId);
+	void updateDoublesIdToNULL(Integer singlesPlayerId);
 	List<SinglesPlayer> findAllPlayer();
 	List<SinglesPlayer> findAllSinglesPlayers();
 	List<SinglesPlayer> findPlayerExceptByPlayerId(Integer singlesPlayerId);
 	List<SinglesPlayer> findPlayersExceptSinglesPlayerId(Integer singlesPlayerId);
 	SinglesPlayer load(Integer singlesPlayerId);
+	void deleteSinglesPlayer(Integer singlesPlayerId);
 }

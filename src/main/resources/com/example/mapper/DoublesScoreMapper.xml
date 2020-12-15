@@ -28,6 +28,14 @@
 		DELETE FROM doubles_scores WHERE doubles_player_id = #{doublesPlayerId} AND opponent_doubles_player_id =#{opponentDoublesPlayerId}
 	</delete>
 	
+	<delete id="deleteDoublesResults">
+		DELETE FROM doubles_scores WHERE doubles_player_id = #{doublesPlayerId}
+	</delete>
+	
+	<delete id="deleteDoublesResultsFromOpponent">
+		DELETE FROM doubles_scores WHERE opponent_doubles_player_id =#{opponentDoublesPlayerId}
+	</delete>
+	
 	<select id="findByBothId" resultMap="DoublesScoreResultMap">
 		SELECT * FROM doubles_scores WHERE doubles_player_id = #{doublesPlayerId} AND opponent_doubles_player_id =#{opponentDoublesPlayerId}
 	</select>

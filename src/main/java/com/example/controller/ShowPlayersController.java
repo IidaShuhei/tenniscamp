@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +14,7 @@ import com.example.domain.DoublesPlayer;
 import com.example.domain.SinglesPlayer;
 import com.example.dto.PlayerListDto;
 import com.example.dto.ResultListDto;
+import com.example.form.DeleteScoreForm;
 import com.example.service.ShowPlayersService;
 
 @RestController
@@ -51,6 +54,11 @@ public class ShowPlayersController {
 		return showPlayersService.findAllDoublesPlayer();
 	}
 	
+	@GetMapping("/showPlayersTeamResult")
+	public List<PlayerListDto> findAllPlayersTeamResult() {
+		return showPlayersService.findAllPlayersTeamResult();
+	}
+	
 	@GetMapping("/showAllDoublesPlayer")
 	public List<DoublesPlayer> findAllDoublesPlayers() {
 		return showPlayersService.findAllDoublesPlayers();
@@ -74,6 +82,21 @@ public class ShowPlayersController {
 	@GetMapping("/showDoublesResult")
 	public List<ResultListDto> findDoublesResult() {
 		return showPlayersService.findDoublesResult();
+	}
+	
+	@PostMapping("/deletePlayer")
+	public void deleteSinglesPlayer(@RequestBody DeleteScoreForm form) {
+		showPlayersService.deleteSinglesPlayer(form.getPlayerId());
+	}
+	
+	@PostMapping("/deleteTeamPlayer")
+	public void deleteTeamPlayer(@RequestBody DeleteScoreForm form) {
+		showPlayersService.deleteTeamPlayer(form.getPlayerId());
+	}
+	
+	@PostMapping("/deleteDoublesPlayer")
+	public void deleteDoublesPlayer(@RequestBody DeleteScoreForm form) {
+		showPlayersService.deleteDoublesPlayer(form.getPlayerId());
 	}
 	
 }

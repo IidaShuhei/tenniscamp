@@ -15,6 +15,10 @@ CREATE TABLE singles_scores(singles_score_id SERIAL PRIMARY KEY, singles_player_
 DROP TABLE IF EXISTS doubles_scores;
 CREATE TABLE doubles_scores(doubles_score_id SERIAL PRIMARY KEY, doubles_player_id Integer NOT NULL, opponent_doubles_player_id Integer NOT NULL, my_match_score Integer NOT NULL, opponent_match_score Integer NOT NULL, mission Integer, register_date timestamp NOT NULL);
 
+--追加得点フィールドを作成
+DROP TABLE IF EXISTS additional_scores;
+CREATE TABLE additional_scores(id SERIAL PRIMARY KEY, player_id Integer NOT NULL, total_wins Integer NOT NULL, total_loss Integer NOT NULL, missions Integer);
+
 --プレイヤーテーブルにインサート
 INSERT INTO singles_players(singles_player_name,doubles_player_id)VALUES('いいだ',1);
 INSERT INTO singles_players(singles_player_name,doubles_player_id)VALUES('やまだ',1);

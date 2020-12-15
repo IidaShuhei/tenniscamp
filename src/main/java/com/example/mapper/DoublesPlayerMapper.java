@@ -13,5 +13,6 @@ public interface DoublesPlayerMapper {
 	List<DoublesPlayer> findAllDoublesPlayer();
 	List<DoublesPlayer> findPlayersExceptDoublesPlayerId(Integer doublesPlayerId);
 	List<DoublesPlayer> findAll();
+	void deleteDoublesPlayer(Integer doublesPlayerId);
 	
 }

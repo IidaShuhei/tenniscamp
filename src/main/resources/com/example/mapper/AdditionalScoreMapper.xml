@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.AdditionalScoreMapper">
+
+	<resultMap type="com.example.domain.AdditionalScore" id="AdditionalScoreResultMap">
+		<id property="id" column="id" />
+		<result property="playerId" column="player_id" />
+		<result property="totalWins" column="total_wins" />
+		<result property="totalLoss" column="total_loss" />
+		<result property="missions" column="missions" />
+	</resultMap>
+
+	<insert id="register">
+		INSERT INTO additional_scores(player_id,total_wins,total_loss,missions)VALUES(#{playerId},#{totalWins},#{totalLoss},#{missions})
+	</insert>
+	
+	<update id="update">
+		UPDATE additional_scores SET total_wins = #{totalWins},total_loss = #{totalLoss},missions = #{missions} WHERE player_id = #{playerId}
+	</update>
+	
+	<select id="findByPlayerId" parameterType="int" resultMap="AdditionalScoreResultMap">
+		SELECT * FROM additional_scores WHERE player_id = #{playeId}
+	</select>
+	
+	<select id="findAll" resultMap="AdditionalScoreResultMap">
+		SELECT * FROM additional_scores
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM additional_scores WHERE player_id = #{playeId}
+	</delete>
+	
+	
+	
+<!-- 	<delete id="deleteDoublesResult"> -->
+<!-- 		DELETE FROM doubles_scores WHERE doubles_player_id = #{doublesPlayerId} AND opponent_doubles_player_id =#{opponentDoublesPlayerId} -->
+<!-- 	</delete> -->
+	
+<!-- 	<delete id="deleteDoublesResults"> -->
+<!-- 		DELETE FROM doubles_scores WHERE doubles_player_id = #{doublesPlayerId} -->
+<!-- 	</delete> -->
+	
+<!-- 	<delete id="deleteDoublesResultsFromOpponent"> -->
+<!-- 		DELETE FROM doubles_scores WHERE opponent_doubles_player_id =#{opponentDoublesPlayerId} -->
+<!-- 	</delete> -->
+	
+<!-- 	<select id="findByBothId" resultMap="DoublesScoreResultMap"> -->
+<!-- 		SELECT * FROM doubles_scores WHERE doubles_player_id = #{doublesPlayerId} AND opponent_doubles_player_id =#{opponentDoublesPlayerId} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="findByBothReverseId" resultMap="DoublesScoreResultMap"> -->
+<!-- 		SELECT * FROM doubles_scores WHERE doubles_player_id = #{opponentDoublesPlayerId} AND opponent_doubles_player_id =#{doublesPlayerId} -->
+<!-- 	</select> -->
+	
+</mapper>

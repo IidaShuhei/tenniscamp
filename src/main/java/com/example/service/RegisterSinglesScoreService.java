@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.common.exception.BadRequestException;
 import com.example.domain.SinglesScore;
 import com.example.form.RegisterSinglesScoreForm;
 import com.example.mapper.SinglesScoreMapper;
+import com.example.utils.CheckScore;
 
 @Service
 @Transactional
@@ -18,72 +18,30 @@ public class RegisterSinglesScoreService {
 	@Autowired
 	private SinglesScoreMapper singlesScoreMapper;
 
-	public Integer registerSinglesScore(RegisterSinglesScoreForm form) throws BadRequestException {
+	public void registerSinglesScore(RegisterSinglesScoreForm form) throws Exception {
 		SinglesScore singlesScore = new SinglesScore();
+		CheckScore.checkScore(form.getMyMatchScore(), form.getOpponentMatchScore());
+		singlesScore.checkMatch(singlesScoreMapper.findByBothId(form.getSinglesPlayerId(), form.getOpponentSinglesPlayerId()));
+
+		// 自分のスコアを登録
+		singlesScore.setSinglesPlayerId(form.getSinglesPlayerId());
+		singlesScore.setOpponentSinglesPlayerId(form.getOpponentSinglesPlayerId());
+		singlesScore.setMyMatchScore(form.getMyMatchScore());
+		singlesScore.setOpponentMatchScore(form.getOpponentMatchScore());
+		singlesScore.setMission(form.getMission1());
+		singlesScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
+		singlesScoreMapper.registerSinglesScore(singlesScore);
+
+		// 相手のスコアも登録
 		SinglesScore singlesOpponentScore = new SinglesScore();
-		if (!form.getMyMatchScore().equals(4) && !form.getOpponentMatchScore().equals(4)) {
+		singlesOpponentScore.setSinglesPlayerId(form.getOpponentSinglesPlayerId());
+		singlesOpponentScore.setOpponentSinglesPlayerId(form.getSinglesPlayerId());
+		singlesOpponentScore.setMyMatchScore(form.getOpponentMatchScore());
+		singlesOpponentScore.setOpponentMatchScore(form.getMyMatchScore());
+		singlesOpponentScore.setMission(form.getMission2());
+		singlesOpponentScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
+		singlesScoreMapper.registerSinglesScore(singlesOpponentScore);
 
-			return 1;
-
-		} else if (form.getMyMatchScore().equals(4) && form.getOpponentMatchScore().equals(4)) {
-
-			return 1;
-
-		} else {
-
-			SinglesScore existScore = singlesScoreMapper.findByBothId(form.getSinglesPlayerId(),
-					form.getOpponentSinglesPlayerId());
-			SinglesScore reverseScore = singlesScoreMapper.findByBothReverseId(form.getOpponentSinglesPlayerId(),
-					form.getSinglesPlayerId());
-
-			if (existScore != null) {
-
-				return 2;
-
-			} else if (reverseScore != null && (reverseScore.getMyMatchScore() != form.getOpponentMatchScore()
-					|| reverseScore.getOpponentMatchScore() != form.getMyMatchScore())) {
-
-				return 3;
-
-			} else {
-				
-				//自分のスコアを登録
-				singlesScore.setSinglesPlayerId(form.getSinglesPlayerId());
-				singlesScore.setOpponentSinglesPlayerId(form.getOpponentSinglesPlayerId());
-				singlesScore.setMyMatchScore(form.getMyMatchScore());
-				singlesScore.setOpponentMatchScore(form.getOpponentMatchScore());
-
-//				Integer totalMission = 0;
-//				Integer mustMission = form.getMustMission();
-//				Integer addMission = form.getAddMission();
-//				totalMission = mustMission + addMission;
-				
-				singlesScore.setMission(form.getMission1());
-				singlesScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
-				
-				singlesScoreMapper.registerSinglesScore(singlesScore);
-				
-				//相手のスコアも登録
-				singlesOpponentScore.setSinglesPlayerId(form.getOpponentSinglesPlayerId());
-				singlesOpponentScore.setOpponentSinglesPlayerId(form.getSinglesPlayerId());
-				singlesOpponentScore.setMyMatchScore(form.getOpponentMatchScore());
-				singlesOpponentScore.setOpponentMatchScore(form.getMyMatchScore());
-				
-//				Integer totalMission = 0;
-//				Integer mustMission = form.getMustMission();
-//				Integer addMission = form.getAddMission();
-//				totalMission = mustMission + addMission;
-				
-				singlesOpponentScore.setMission(form.getMission2());
-				singlesOpponentScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
-				
-				singlesScoreMapper.registerSinglesScore(singlesOpponentScore);
-				
-
-				return 4;
-
-			}
-		}
 	}
 
 }
