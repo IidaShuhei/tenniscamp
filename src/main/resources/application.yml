@@ -25,7 +25,7 @@ server:
 environments:
 #  originUrl: http://localhost:8888
   
-  originUrl: https://tenniscamp-app-f734e.web.app/
+  originUrl: https://tenniscamp-app-f734e.web.app
 
 path:
   uploadPath: "src/main/resources/static/images/"
