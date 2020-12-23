@@ -12,7 +12,7 @@
 		<result property="registerDate" column="register_date" />
 	</resultMap>
 
-	<insert id="registerSinglesScore">
+	<insert id="register">
 		INSERT INTO singles_scores(singles_player_id,opponent_singles_player_id,my_match_score,opponent_match_score,mission,register_date)VALUES(#{singlesPlayerId},#{opponentSinglesPlayerId},#{myMatchScore},#{opponentMatchScore},#{mission},#{registerDate})
 	</insert>
 	
@@ -20,15 +20,15 @@
 		SELECT * FROM singles_scores
 	</select>
 	
-	<delete id="deleteSinglesResult">
+	<delete id="delete">
 		DELETE FROM singles_scores WHERE singles_player_id = #{singlesPlayerId} AND opponent_singles_player_id =#{opponentSinglesPlayerId}
 	</delete>
 	
-	<delete id="deleteSinglesResults">
+	<delete id="deleteScore">
 		DELETE FROM singles_scores WHERE singles_player_id = #{singlesPlayerId}
 	</delete>
 	
-	<delete id="deleteSinglesResultsFromOpponent">
+	<delete id="deleteScoreFromOpponent">
 		DELETE FROM singles_scores WHERE opponent_singles_player_id =#{opponentSinglesPlayerId}
 	</delete>
 	
@@ -36,8 +36,4 @@
 		SELECT * FROM singles_scores WHERE singles_player_id = #{singlesPlayerId} AND opponent_singles_player_id =#{opponentSinglesPlayerId}
 	</select>
 	
-	<select id="findByBothReverseId" resultMap="SinglesScoreResultMap">
-		SELECT * FROM singles_scores WHERE singles_player_id = #{opponentSinglesPlayerId} AND opponent_singles_player_id =#{singlesPlayerId}
-	</select>
-
 </mapper>

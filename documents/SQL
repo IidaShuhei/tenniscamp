@@ -1,7 +1,7 @@
 --テーブル作成
 --シングルスプレイヤーテーブルを作成します。
 DROP TABLE IF EXISTS singles_players;
-CREATE TABLE singles_players(singles_player_id SERIAL PRIMARY KEY, singles_player_name varchar(100) NOT NULL, doubles_player_id Integer);
+CREATE TABLE singles_players(singles_player_id SERIAL PRIMARY KEY, singles_player_name varchar(100) NOT NULL, doubles_player_id Integer NOT NULL);
 
 --ダブルステーブルを作成します。
 DROP TABLE IF EXISTS doubles_players;

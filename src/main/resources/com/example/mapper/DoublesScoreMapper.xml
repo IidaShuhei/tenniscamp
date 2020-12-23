@@ -12,11 +12,11 @@
 		<result property="registerDate" column="register_date" />
 	</resultMap>
 
-	<insert id="registerDoublesScore">
+	<insert id="register">
 		INSERT INTO doubles_scores(doubles_player_id,opponent_doubles_player_id,my_match_score,opponent_match_score,mission,register_date)VALUES(#{doublesPlayerId},#{opponentDoublesPlayerId},#{myMatchScore},#{opponentMatchScore},#{mission},#{registerDate})
 	</insert>
 	
-	<select id="findByDoublesPlayerId" parameterType="int" resultMap="DoublesScoreResultMap">
+	<select id="load" parameterType="int" resultMap="DoublesScoreResultMap">
 		SELECT * FROM doubles_scores WHERE doubles_player_id = #{doublesPlayeId}
 	</select>
 	
@@ -24,24 +24,20 @@
 		SELECT * FROM doubles_scores
 	</select>
 	
-	<delete id="deleteDoublesResult">
+	<delete id="delete">
 		DELETE FROM doubles_scores WHERE doubles_player_id = #{doublesPlayerId} AND opponent_doubles_player_id =#{opponentDoublesPlayerId}
 	</delete>
 	
-	<delete id="deleteDoublesResults">
+	<delete id="deleteScore">
 		DELETE FROM doubles_scores WHERE doubles_player_id = #{doublesPlayerId}
 	</delete>
 	
-	<delete id="deleteDoublesResultsFromOpponent">
+	<delete id="deleteScoreFromOpponent">
 		DELETE FROM doubles_scores WHERE opponent_doubles_player_id =#{opponentDoublesPlayerId}
 	</delete>
 	
 	<select id="findByBothId" resultMap="DoublesScoreResultMap">
 		SELECT * FROM doubles_scores WHERE doubles_player_id = #{doublesPlayerId} AND opponent_doubles_player_id =#{opponentDoublesPlayerId}
-	</select>
-	
-	<select id="findByBothReverseId" resultMap="DoublesScoreResultMap">
-		SELECT * FROM doubles_scores WHERE doubles_player_id = #{opponentDoublesPlayerId} AND opponent_doubles_player_id =#{doublesPlayerId}
 	</select>
 	
 </mapper>

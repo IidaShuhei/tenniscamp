@@ -1,7 +1,5 @@
 package com.example.mapper;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.domain.AdditionalScore;
@@ -10,13 +8,8 @@ import com.example.domain.AdditionalScore;
 public interface AdditionalScoreMapper {
 
 	void register(AdditionalScore score);
-	
 	void update(AdditionalScore score);
-	
-	AdditionalScore findByPlayerId(Integer playerId);
-	
-	List<AdditionalScore> findAll();
-	
+	AdditionalScore load(Integer playerId);
 	void delete(Integer playerId);
 	
 }

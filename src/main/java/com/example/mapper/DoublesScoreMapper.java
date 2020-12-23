@@ -9,20 +9,12 @@ import com.example.domain.DoublesScore;
 @Mapper
 public interface DoublesScoreMapper {
 
-	void registerDoublesScore(DoublesScore doublesScore);
-	
-	List<DoublesScore> findByDoublesPlayerId(Integer doublesPlayerId);
-	
+	void register(DoublesScore doublesScore);
+	List<DoublesScore> load(Integer doublesPlayerId);
 	List<DoublesScore> findAll();
-	
-	void deleteDoublesResult(Integer doublesPlayerId, Integer opponentDoublesPlayerId);
-	
-	void deleteDoublesResults(Integer doublesPlayerId);
-	
-	void deleteDoublesResultsFromOpponent(Integer opponentDoublesPlayerId);
-	
+	void delete(Integer doublesPlayerId, Integer opponentDoublesPlayerId);
+	void deleteScore(Integer doublesPlayerId);
+	void deleteScoreFromOpponent(Integer opponentDoublesPlayerId);
 	DoublesScore findByBothId(Integer doublesPlayerId, Integer opponentDoublesPlayerId);
-	
-	DoublesScore findByBothReverseId(Integer opponentDoublesPlayerId, Integer doublesPlayerId);
 	
 }

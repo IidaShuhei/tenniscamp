@@ -17,14 +17,16 @@ public class DeleteScoreService {
 	@Autowired
 	private DoublesScoreMapper doublesScoreMapper;
 	
+	//シングルスのスコアを削除
 	public void deleteSinglesResult(Integer singlesPlayerId, Integer opponentSinglesPlayerId) {
-		singlesScoreMapper.deleteSinglesResult(singlesPlayerId, opponentSinglesPlayerId);
-		singlesScoreMapper.deleteSinglesResult(opponentSinglesPlayerId, singlesPlayerId);
+		singlesScoreMapper.delete(singlesPlayerId, opponentSinglesPlayerId);
+		singlesScoreMapper.delete(opponentSinglesPlayerId, singlesPlayerId);
 	}
 	
+	//ダブルスのスコアを削除
 	public void deleteDoublesResult(Integer doublesPlayerId, Integer opponentDoublesPlayerId) {
-		doublesScoreMapper.deleteDoublesResult(doublesPlayerId, opponentDoublesPlayerId);
-		doublesScoreMapper.deleteDoublesResult(opponentDoublesPlayerId, doublesPlayerId);
+		doublesScoreMapper.delete(doublesPlayerId, opponentDoublesPlayerId);
+		doublesScoreMapper.delete(opponentDoublesPlayerId, doublesPlayerId);
 	}
 	
 }

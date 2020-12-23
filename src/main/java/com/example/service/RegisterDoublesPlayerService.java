@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.domain.DoublesPlayer;
 import com.example.domain.SinglesPlayer;
-import com.example.form.RegisterDoublesPlayerForm;
 import com.example.mapper.DoublesPlayerMapper;
 import com.example.mapper.SinglesPlayerMapper;
 
@@ -18,16 +17,16 @@ public class RegisterDoublesPlayerService {
 	@Autowired
 	private SinglesPlayerMapper singlesPlayerMapper;
 	
-	public void registerDoublesPlayer(RegisterDoublesPlayerForm form) {
+	public void insert(Integer doubles1, Integer doubles2) {
 		DoublesPlayer doublesPlayer = new DoublesPlayer();
-		SinglesPlayer player1 = singlesPlayerMapper.load(form.getDoublesPlayerId1());
-		SinglesPlayer player2 = singlesPlayerMapper.load(form.getDoublesPlayerId2());
+		SinglesPlayer player1 = singlesPlayerMapper.load(doubles1);
+		SinglesPlayer player2 = singlesPlayerMapper.load(doubles2);
 		doublesPlayer.setDoublesPlayerName(player1.getSinglesPlayerName() + "・" + player2.getSinglesPlayerName());
-		Integer doublesPlayerId = doublesPlayerMapper.registerDoublesPlayer(doublesPlayer);
+		Integer doublesPlayerId = doublesPlayerMapper.register(doublesPlayer);
 		
 		//ダブルスペアを登録
-		singlesPlayerMapper.updateSinglesPlayer(doublesPlayerId,form.getDoublesPlayerId2());
-		singlesPlayerMapper.updateSinglesPlayer(doublesPlayerId,form.getDoublesPlayerId1());
+		singlesPlayerMapper.updateDoublesId(doublesPlayerId,doubles2);
+		singlesPlayerMapper.updateDoublesId(doublesPlayerId,doubles1);
 	}
 	
 }

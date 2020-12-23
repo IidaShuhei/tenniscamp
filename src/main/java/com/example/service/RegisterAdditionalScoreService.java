@@ -21,7 +21,7 @@ public class RegisterAdditionalScoreService {
 	
 	public void register(RegisterAdditionalScoreForm form) {
 		
-		AdditionalScore oldScore = mapper.findByPlayerId(form.getPlayerId());
+		AdditionalScore oldScore = mapper.load(form.getPlayerId());
 		
 		AdditionalScore score = new AdditionalScore();
 		score.setPlayerId(form.getPlayerId());

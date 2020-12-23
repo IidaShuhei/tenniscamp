@@ -79,11 +79,11 @@ public class CheckScore {
 	public CheckScore calcTeamResult(SinglesPlayer player,AdditionalScoreMapper additionalScoreMapper) {
 		CheckScore checkScore = new CheckScore();
 		
-		if(additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()) != null) {
-			totalWin = additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()).getTotalWins();
-			totalLose = additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()).getTotalLoss();
-			totalMission = additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()).getMissions();
-			totalScore = (additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()).getTotalWins() * additionalWinPoint) + totalMission;
+		if(additionalScoreMapper.load(player.getSinglesPlayerId()) != null) {
+			totalWin = additionalScoreMapper.load(player.getSinglesPlayerId()).getTotalWins();
+			totalLose = additionalScoreMapper.load(player.getSinglesPlayerId()).getTotalLoss();
+			totalMission = additionalScoreMapper.load(player.getSinglesPlayerId()).getMissions();
+			totalScore = (additionalScoreMapper.load(player.getSinglesPlayerId()).getTotalWins() * additionalWinPoint) + totalMission;
 			
 			checkScore.setTotalWin(totalWin);
 			checkScore.setTotalMission(totalMission);
@@ -122,11 +122,11 @@ public class CheckScore {
 		totalScore = (totalWin * winPoint) + totalMission;
 		
 		//追加得点の加算
-		if(additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()) != null) {
-			totalWin += additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()).getTotalWins();
-			totalLose += additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()).getTotalLoss();
-			totalMission += additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()).getMissions();
-			totalScore += ((additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()).getTotalWins() * additionalWinPoint) + additionalScoreMapper.findByPlayerId(player.getSinglesPlayerId()).getMissions());
+		if(additionalScoreMapper.load(player.getSinglesPlayerId()) != null) {
+			totalWin += additionalScoreMapper.load(player.getSinglesPlayerId()).getTotalWins();
+			totalLose += additionalScoreMapper.load(player.getSinglesPlayerId()).getTotalLoss();
+			totalMission += additionalScoreMapper.load(player.getSinglesPlayerId()).getMissions();
+			totalScore += ((additionalScoreMapper.load(player.getSinglesPlayerId()).getTotalWins() * additionalWinPoint) + additionalScoreMapper.load(player.getSinglesPlayerId()).getMissions());
 		}
 		checkScore.setTotalWin(totalWin);
 		checkScore.setTotalMission(totalMission);

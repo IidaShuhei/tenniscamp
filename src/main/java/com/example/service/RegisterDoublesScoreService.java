@@ -30,7 +30,7 @@ public class RegisterDoublesScoreService {
 		doublesScore.setOpponentMatchScore(form.getOpponentMatchScore());
 		doublesScore.setMission(form.getMission1());
 		doublesScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
-		doublesScoreMapper.registerDoublesScore(doublesScore);
+		doublesScoreMapper.register(doublesScore);
 
 		// 相手チーム
 		DoublesScore doublesOpponentScore = new DoublesScore();
@@ -40,7 +40,7 @@ public class RegisterDoublesScoreService {
 		doublesOpponentScore.setOpponentMatchScore(form.getMyMatchScore());
 		doublesOpponentScore.setMission(form.getMission2());
 		doublesOpponentScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
-		doublesScoreMapper.registerDoublesScore(doublesOpponentScore);
+		doublesScoreMapper.register(doublesOpponentScore);
 
 	}
 

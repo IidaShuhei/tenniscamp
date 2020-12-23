@@ -9,56 +9,30 @@
 			column="doubles_player_name" />
 	</resultMap>
 
-	<select id="registerDoublesPlayer" resultType="int">
-		INSERT INTO
-		doubles_players
-		(
-		doubles_player_name
-		)
-		VALUES
-		(
-		#{doublesPlayerName}
-		)
-		returning doubles_player_id
+	<select id="register" resultType="int">
+		INSERT INTO doubles_players(doubles_player_name)VALUES(#{doublesPlayerName})returning doubles_player_id
 	</select>
 
-	<select id="findAllDoublesPlayer"
-		resultMap="DoublesPlayersResultMap">
-		SELECT * FROM doubles_players
-	</select>
-
-	<select id="findPlayersExceptDoublesPlayerId"
-		resultMap="DoublesPlayersResultMap" parameterType="int">
-		<![CDATA[ SELECT * FROM doubles_players WHERE doubles_player_id <> #{doublesPlayerId}]]>
-	</select>
-
-	<delete id="deleteDoublesPlayer">
+	<delete id="delete">
 		DELETE FROM doubles_players where doubles_player_id =
 		#{doublesPlayerId}
 	</delete>
 
-	<resultMap type="com.example.domain.DoublesPlayer"
-		id="DoublesPlayerResultMap">
+	<resultMap type="com.example.domain.DoublesPlayer" id="DoublesPlayerResultMap">
 		<id property="doublesPlayerId" column="d_doubles_player_id" />
-		<result property="doublesPlayerName"
-			column="doubles_player_name" />
-		<collection property="doublesScoreList"
-			ofType="com.example.domain.DoublesScore">
-			<id property="doublesScoreId" column="doubles_score_id" />
-			<result property="doublesPlayerId"
-				column="ds_doubles_player_id" />
-			<result property="opponentDoublesPlayerId"
-				column="opponent_doubles_player_id" />
-			<result property="myMatchScore" column="my_match_score" />
-			<result property="opponentMatchScore"
-				column="opponent_match_score" />
-			<result property="mission" column="mission" />
-			<result property="registerDate" column="register_date" />
-		</collection>
+		<result property="doublesPlayerName" column="doubles_player_name" />
+			<collection property="doublesScoreList" ofType="com.example.domain.DoublesScore">
+				<id property="doublesScoreId" column="doubles_score_id" />
+				<result property="doublesPlayerId" column="ds_doubles_player_id" />
+				<result property="opponentDoublesPlayerId" column="opponent_doubles_player_id" />
+				<result property="myMatchScore" column="my_match_score" />
+				<result property="opponentMatchScore" column="opponent_match_score" />
+				<result property="mission" column="mission" />
+				<result property="registerDate" column="register_date" />
+			</collection>
 	</resultMap>
 
-	<select id="findAll" parameterType="int"
-		resultMap="DoublesPlayerResultMap">
+	<select id="findPlayersWithScores" parameterType="int" resultMap="DoublesPlayerResultMap">
 		SELECT
 		d.doubles_player_id d_doubles_player_id,
 		doubles_player_name,

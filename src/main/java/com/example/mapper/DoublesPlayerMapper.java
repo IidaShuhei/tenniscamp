@@ -9,10 +9,8 @@ import com.example.domain.DoublesPlayer;
 @Mapper
 public interface DoublesPlayerMapper {
 
-	Integer registerDoublesPlayer(DoublesPlayer doublesPlayer);
-	List<DoublesPlayer> findAllDoublesPlayer();
-	List<DoublesPlayer> findPlayersExceptDoublesPlayerId(Integer doublesPlayerId);
-	List<DoublesPlayer> findAll();
-	void deleteDoublesPlayer(Integer doublesPlayerId);
+	Integer register(DoublesPlayer doublesPlayer);
+	void delete(Integer doublesPlayerId);
+	List<DoublesPlayer> findPlayersWithScores();
 	
 }

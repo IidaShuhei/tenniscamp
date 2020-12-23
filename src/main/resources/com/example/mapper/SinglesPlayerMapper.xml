@@ -2,29 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.SinglesPlayerMapper">
 
-	<resultMap type="com.example.domain.SinglesPlayer"
-		id="SinglesPlayerResultMap">
+	<resultMap type="com.example.domain.SinglesPlayer" id="SinglesPlayerResultMap">
 		<id property="singlesPlayerId" column="s_singles_player_id" />
-		<result property="singlesPlayerName"
-			column="singles_player_name" />
+		<result property="singlesPlayerName" column="singles_player_name" />
 		<result property="doublesPlayerId" column="s_doubles_player_id" />
-		<collection property="singlesScoreList"
-			ofType="com.example.domain.SinglesScore">
+		<collection property="singlesScoreList" ofType="com.example.domain.SinglesScore">
 			<id property="singlesScoreId" column="singles_score_id" />
-			<result property="singlesPlayerId"
-				column="ss_singles_player_id" />
-			<result property="opponentSinglesPlayerId"
-				column="opponent_singles_player_id" />
+			<result property="singlesPlayerId" column="ss_singles_player_id" />
+			<result property="opponentSinglesPlayerId" column="opponent_singles_player_id" />
 			<result property="myMatchScore" column="ss_my_match_score" />
-			<result property="opponentMatchScore"
-				column="ss_opponent_match_score" />
+			<result property="opponentMatchScore" column="ss_opponent_match_score" />
 			<result property="mission" column="ss_mission" />
 			<result property="registerDate" column="ss_register_date" />
 		</collection>
 	</resultMap>
 
-	<select id="findAll" parameterType="int"
-		resultMap="SinglesPlayerResultMap">
+	<select id="findPlayersWithScores" parameterType="int" resultMap="SinglesPlayerResultMap">
 		SELECT
 		s.singles_player_id s_singles_player_id,
 		singles_player_name,
@@ -46,58 +39,36 @@
 	</select>
 
 
-	<resultMap type="com.example.domain.SinglesPlayer"
-		id="SinglesPlayersResultMap">
+	<resultMap type="com.example.domain.SinglesPlayer" id="SinglesPlayersResultMap">
 		<id property="singlesPlayerId" column="singles_player_id" />
-		<result property="singlesPlayerName"
-			column="singles_player_name" />
+		<result property="singlesPlayerName" column="singles_player_name" />
 		<result property="doublesPlayerId" column="doubles_player_id" />
 	</resultMap>
 
-	<insert id="registerSinglesPlayer">
-		INSERT INTO singles_players(singles_player_name
-		)VALUES(#{singlesPlayerName}
-		)
-	</insert>
-
-	<update id="updateSinglesPlayer">
+	<update id="updateDoublesId">
 		UPDATE singles_players SET doubles_player_id =
 		#{doublesPlayerId} WHERE singles_player_id = #{singlesPlayerId}
 	</update>
-
-	<select id="findAllPlayer" resultMap="SinglesPlayersResultMap">
-		SELECT * FROM
-		singles_players WHERE doubles_player_id IS NULL
-		ORDER BY singles_player_id
-	</select>
-
-	<select id="findAllSinglesPlayers"
-		resultMap="SinglesPlayersResultMap">
-		SELECT * FROM singles_players ORDER BY singles_player_id
-	</select>
 
 	<select id="load" resultMap="SinglesPlayersResultMap">
 		SELECT * FROM singles_players WHERE
 		singles_player_id = #{singlesPlayerId}
 	</select>
-
-	<select id="findPlayerExceptByPlayerId" parameterType="int"
-		resultMap="SinglesPlayersResultMap">
-		<![CDATA[ SELECT * FROM singles_players WHERE singles_player_id <> #{singlesPlayerId} AND doubles_player_id IS NULL ]]>
+	
+	<select id="findAll" resultMap="SinglesPlayersResultMap">
+		SELECT * FROM singles_players ORDER BY singles_player_id
 	</select>
-
-	<select id="findPlayersExceptSinglesPlayerId"
-		parameterType="int" resultMap="SinglesPlayersResultMap">
-		<![CDATA[ SELECT * FROM singles_players WHERE singles_player_id <> #{singlesPlayerId} ]]>
-	</select>
-
-	<delete id="deleteSinglesPlayer">
-		DELETE FROM singles_players where singles_player_id =
-		#{singlesPlayerId}
+	
+	<insert id="register">
+		INSERT INTO singles_players(singles_player_name, doubles_player_id)VALUES(#{singlesPlayerName},#{doublesPlayerId})
+	</insert>
+	
+	<update id="resetDoublesId">
+		UPDATE singles_players SET doubles_player_id = #{resetNumber} WHERE doubles_player_id = #{doublesPlayerId}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM singles_players where singles_player_id =#{singlesPlayerId}
 	</delete>
 	
-	<update id="updateDoublesIdToNULL">
-		UPDATE singles_players SET doubles_player_id = NULL WHERE doubles_player_id = #{doublesPlayerId}
-	</update>
-
 </mapper>

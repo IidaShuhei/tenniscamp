@@ -30,7 +30,7 @@ public class RegisterSinglesScoreService {
 		singlesScore.setOpponentMatchScore(form.getOpponentMatchScore());
 		singlesScore.setMission(form.getMission1());
 		singlesScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
-		singlesScoreMapper.registerSinglesScore(singlesScore);
+		singlesScoreMapper.register(singlesScore);
 
 		// 相手のスコアも登録
 		SinglesScore singlesOpponentScore = new SinglesScore();
@@ -40,7 +40,7 @@ public class RegisterSinglesScoreService {
 		singlesOpponentScore.setOpponentMatchScore(form.getMyMatchScore());
 		singlesOpponentScore.setMission(form.getMission2());
 		singlesOpponentScore.setRegisterDate(new Timestamp(System.currentTimeMillis()));
-		singlesScoreMapper.registerSinglesScore(singlesOpponentScore);
+		singlesScoreMapper.register(singlesOpponentScore);
 
 	}
 

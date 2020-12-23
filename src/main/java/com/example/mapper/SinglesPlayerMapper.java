@@ -9,14 +9,12 @@ import com.example.domain.SinglesPlayer;
 @Mapper
 public interface SinglesPlayerMapper {
 
-	List<SinglesPlayer> findAll();
-	void registerSinglesPlayer(SinglesPlayer singlesPlayer);
-	void updateSinglesPlayer(Integer doublesPlayerId, Integer singlesPlayerId);
-	void updateDoublesIdToNULL(Integer singlesPlayerId);
-	List<SinglesPlayer> findAllPlayer();
-	List<SinglesPlayer> findAllSinglesPlayers();
-	List<SinglesPlayer> findPlayerExceptByPlayerId(Integer singlesPlayerId);
-	List<SinglesPlayer> findPlayersExceptSinglesPlayerId(Integer singlesPlayerId);
+	List<SinglesPlayer> findPlayersWithScores();
 	SinglesPlayer load(Integer singlesPlayerId);
-	void deleteSinglesPlayer(Integer singlesPlayerId);
+	List<SinglesPlayer> findAll();
+	void register(SinglesPlayer singlesPlayer);
+	void updateDoublesId(Integer doublesPlayerId, Integer singlesPlayerId);
+	void resetDoublesId(Integer resetNumber, Integer doublesPlayerId);
+	void delete(Integer singlesPlayerId);
+	
 }
