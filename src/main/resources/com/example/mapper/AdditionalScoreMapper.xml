@@ -19,11 +19,19 @@
 	</update>
 	
 	<select id="load" parameterType="int" resultMap="AdditionalScoreResultMap">
-		SELECT * FROM additional_scores WHERE player_id = #{playeId}
+		SELECT * FROM additional_scores WHERE player_id = #{playerId}
 	</select>
 	
 	<delete id="delete">
-		DELETE FROM additional_scores WHERE player_id = #{playeId}
+		DELETE FROM additional_scores WHERE player_id = #{playerId}
 	</delete>
+	
+	<!-- テストで使用 -->
+	<select id="count" resultMap="AdditionalScoreResultMap">
+		SELECT * FROM additional_scores
+	</select>
+	<select id="findByPlayerId" resultMap="AdditionalScoreResultMap">
+		SELECT * FROM additional_scores WHERE player_id = #{playerId}
+	</select>
 	
 </mapper>
