@@ -16,10 +16,10 @@ import com.example.utils.OrderPlayer;
 @Service
 @Transactional
 public class ShowDoublesPlayerService {
-	
+
 	@Autowired
 	private DoublesPlayerMapper doublesPlayerMapper;
-	
+
 	/**
 	 * ダブルス選手一覧を表示するサービス.
 	 * 
@@ -31,10 +31,14 @@ public class ShowDoublesPlayerService {
 		for (DoublesPlayer player : doublesPlayerList) {
 			CheckScore score = new CheckScore();
 			score = score.calcScore(null, player.getDoublesScoreList());
-			PlayerListDto dto = new PlayerListDto(null, player,score);
+			PlayerListDto dto = new PlayerListDto(null, player, score);
 			playerListDtoList.add(dto);
 		}
-		return OrderPlayer.order(playerListDtoList);
+		if (playerListDtoList.isEmpty()) {
+			return null;
+		} else {
+			return OrderPlayer.order(playerListDtoList);
+		}
 	}
 
 }

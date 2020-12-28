@@ -28,8 +28,11 @@ public class ShowSinglesScoreService {
 			resultListDtoList.add(dto);
 			dto.removeSameResult(resultListDtoList, dto);
 		});
-
-		return resultListDtoList;
+		if (resultListDtoList.isEmpty()) {
+			return null;
+		} else {
+			return resultListDtoList;
+		}
 	}
 
 }

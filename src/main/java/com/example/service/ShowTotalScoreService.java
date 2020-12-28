@@ -19,13 +19,13 @@ import com.example.utils.OrderPlayer;
 @Service
 @Transactional
 public class ShowTotalScoreService {
-	
+
 	@Autowired
 	private SinglesPlayerMapper singlesPlayerMapper;
-	
+
 	@Autowired
 	private DoublesScoreMapper doublesScoreMapper;
-	
+
 	@Autowired
 	private AdditionalScoreMapper additionalScoreMapper;
 
@@ -41,10 +41,14 @@ public class ShowTotalScoreService {
 			List<DoublesScore> doublesScore = doublesScoreMapper.load(player.getDoublesPlayerId());
 			CheckScore score = new CheckScore();
 			score = score.totalScore(player, doublesScore, additionalScoreMapper);
-			PlayerListDto dto = new PlayerListDto(player,null,score);
+			PlayerListDto dto = new PlayerListDto(player, null, score);
 			playerListDtoList.add(dto);
 		}
-		return OrderPlayer.order(playerListDtoList);
+		if (playerListDtoList.isEmpty()) {
+			return null;
+		} else {
+			return OrderPlayer.order(playerListDtoList);
+		}
 	}
-	
+
 }

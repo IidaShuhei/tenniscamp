@@ -43,7 +43,11 @@ public class ShowSinglesPlayerService {
 			PlayerListDto dto = new PlayerListDto(player,null,score);
 			playerListDtoList.add(dto);
 		});
-		return OrderPlayer.order(playerListDtoList);
+		if(playerListDtoList.isEmpty()) {
+			return null;
+		} else {
+			return OrderPlayer.order(playerListDtoList);
+		}
 	}
 	
 }
