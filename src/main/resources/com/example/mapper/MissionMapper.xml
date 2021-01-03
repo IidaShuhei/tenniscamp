@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MissionMapper">
+
+	<resultMap type="com.example.domain.Mission" id="MissionResultMap">
+		<id property="id" column="id" />
+		<result property="mission" column="mission" />
+	</resultMap>
+
+	<insert id="register">
+		INSERT INTO missions(mission)VALUES(#{mission})
+	</insert>
+	
+	<select id="findAll" resultMap="MissionResultMap">
+		SELECT * FROM missions
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM missions WHERE id = #{id}
+	</delete>
+	
+</mapper>
